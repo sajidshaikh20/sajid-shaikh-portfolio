@@ -179,53 +179,39 @@ form.addEventListener("submit", function(e) {
   formBtn.innerHTML = '<ion-icon name="hourglass-outline"></ion-icon><span>Sending...</span>';
   
   // Get form data
-  const formData = {
-    from_name: form.querySelector('input[name="fullname"]').value,
-    from_email: form.querySelector('input[name="email"]').value,
-    message: form.querySelector('textarea[name="message"]').value,
-    to_email: 'Sajid20shaikh@gmail.com'
-  };
+  const formData = new FormData(form);
   
-  // Send email using EmailJS (with error handling)
-  if (typeof emailjs !== 'undefined') {
-    console.log("Sending email with data:", formData);
-    console.log("Using service ID: service_4x3ruat");
-    
-    // Send only ONE notification email to you
-    emailjs.send('service_4x3ruat', 'template_2u2efkq', formData)
-      .then(function(response) {
-        console.log("Email sent successfully:", response);
-        // Success - show thank you message to user
-        successMessage.style.display = "block";
-        successMessage.classList.add("show");
-        form.reset();
-        formBtn.setAttribute("disabled", "");
-      })
-      .catch(function(error) {
-        console.error("Email sending failed:", error);
-        // Error
-        errorMessage.style.display = "block";
-        errorMessage.classList.add("show");
-      })
-      .finally(() => {
-        // Re-enable submit button and reset flag
-        isSubmitting = false;
-        formBtn.disabled = false;
-        formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Message</span>';
-      });
-  } else {
-    // Fallback if EmailJS is not loaded
-    setTimeout(() => {
+  // Send email using Formspree
+  fetch(form.action, {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      // Success
       successMessage.style.display = "block";
       successMessage.classList.add("show");
       form.reset();
       formBtn.setAttribute("disabled", "");
-      isSubmitting = false;
-      formBtn.disabled = false;
-      formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Message</span>';
-      console.log("Contact Form Submission (EmailJS not available):", formData);
-    }, 1000);
-  }
+    } else {
+      throw new Error('Form submission failed');
+    }
+  })
+  .catch(error => {
+    console.error("Form submission failed:", error);
+    // Error
+    errorMessage.style.display = "block";
+    errorMessage.classList.add("show");
+  })
+  .finally(() => {
+    // Re-enable submit button and reset flag
+    isSubmitting = false;
+    formBtn.disabled = false;
+    formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Message</span>';
+  });
 });
 
 
