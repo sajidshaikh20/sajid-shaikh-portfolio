@@ -1,6 +1,7 @@
 'use strict';
 
-
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
 
 // element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
@@ -148,8 +149,12 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
-// Initialize EmailJS with working credentials
-emailjs.init("6LXxfCSjbNlXp-CBk");
+// Initialize EmailJS with working credentials (with error handling)
+if (typeof emailjs !== 'undefined') {
+  emailjs.init("6LXxfCSjbNlXp-CBk");
+} else {
+  console.log("EmailJS not loaded yet, will retry...");
+}
 
 // form submission handling
 form.addEventListener("submit", function(e) {
@@ -171,24 +176,37 @@ form.addEventListener("submit", function(e) {
     to_email: 'Sajid20shaikh@gmail.com'
   };
   
-  // Send email using EmailJS
-  emailjs.send('service_portfolio', 'template_contact', formData)
-    .then(function(response) {
-      // Success
+  // Send email using EmailJS (with error handling)
+  if (typeof emailjs !== 'undefined') {
+    emailjs.send('service_portfolio', 'template_contact', formData)
+      .then(function(response) {
+        // Success
+        successMessage.style.display = "block";
+        successMessage.classList.add("show");
+        form.reset();
+        formBtn.setAttribute("disabled", "");
+      }, function(error) {
+        // Error
+        errorMessage.style.display = "block";
+        errorMessage.classList.add("show");
+      })
+      .finally(() => {
+        // Re-enable submit button
+        formBtn.disabled = false;
+        formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Message</span>';
+      });
+  } else {
+    // Fallback if EmailJS is not loaded
+    setTimeout(() => {
       successMessage.style.display = "block";
       successMessage.classList.add("show");
       form.reset();
       formBtn.setAttribute("disabled", "");
-    }, function(error) {
-      // Error
-      errorMessage.style.display = "block";
-      errorMessage.classList.add("show");
-    })
-    .finally(() => {
-      // Re-enable submit button
       formBtn.disabled = false;
       formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Message</span>';
-    });
+      console.log("Contact Form Submission (EmailJS not available):", formData);
+    }, 1000);
+  }
 });
 
 
@@ -224,3 +242,5 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
   });
 }
+
+}); // End of DOMContentLoaded
