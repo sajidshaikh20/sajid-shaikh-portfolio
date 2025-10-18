@@ -178,14 +178,19 @@ form.addEventListener("submit", function(e) {
   
   // Send email using EmailJS (with error handling)
   if (typeof emailjs !== 'undefined') {
-    emailjs.send('service_portfolio', 'template_contact', formData)
+    console.log("Sending email with data:", formData);
+    console.log("Using service ID: service_4x3ruat");
+    
+    emailjs.send('service_4x3ruat', 'template_contact', formData)
       .then(function(response) {
+        console.log("Email sent successfully:", response);
         // Success
         successMessage.style.display = "block";
         successMessage.classList.add("show");
         form.reset();
         formBtn.setAttribute("disabled", "");
       }, function(error) {
+        console.error("Email sending failed:", error);
         // Error
         errorMessage.style.display = "block";
         errorMessage.classList.add("show");
