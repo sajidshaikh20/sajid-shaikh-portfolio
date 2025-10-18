@@ -190,14 +190,21 @@ form.addEventListener("submit", function(e) {
   
   // Simulate sending (open email client)
   setTimeout(() => {
-    // Open email client
-    window.open(mailtoLink, '_blank');
-    
-    // Show success message
-    successMessage.style.display = "block";
-    successMessage.classList.add("show");
-    form.reset();
-    formBtn.setAttribute("disabled", "");
+    try {
+      // Try to open email client
+      window.location.href = mailtoLink;
+      
+      // Show success message
+      successMessage.style.display = "block";
+      successMessage.classList.add("show");
+      form.reset();
+      formBtn.setAttribute("disabled", "");
+    } catch (error) {
+      console.error("Error opening email client:", error);
+      // Show error message
+      errorMessage.style.display = "block";
+      errorMessage.classList.add("show");
+    }
     
     // Re-enable submit button and reset flag
     isSubmitting = false;
