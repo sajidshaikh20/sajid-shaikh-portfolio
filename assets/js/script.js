@@ -181,26 +181,11 @@ form.addEventListener("submit", function(e) {
     console.log("Sending email with data:", formData);
     console.log("Using service ID: service_4x3ruat");
     
-    // Send notification email to you
+    // Send notification email to you only
     emailjs.send('service_4x3ruat', 'template_2u2efkq', formData)
       .then(function(response) {
-        console.log("Notification email sent successfully:", response);
-        
-        // Send thank you email to sender
-        const thankYouData = {
-          from_name: 'Sajid Shaikh',
-          from_email: 'Sajid20shaikh@gmail.com',
-          to_name: formData.from_name,
-          to_email: formData.from_email,
-          message: formData.message
-        };
-        
-        // Send thank you email using the same template but with different data
-        return emailjs.send('service_4x3ruat', 'template_2u2efkq', thankYouData);
-      })
-      .then(function(response) {
-        console.log("Thank you email sent successfully:", response);
-        // Success
+        console.log("Email sent successfully:", response);
+        // Success - show thank you message to user
         successMessage.style.display = "block";
         successMessage.classList.add("show");
         form.reset();
