@@ -131,6 +131,8 @@ for (let i = 0; i < filterBtn.length; i++) {
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
 const formBtn = document.querySelector("[data-form-btn]");
+const successMessage = document.getElementById("form-success");
+const errorMessage = document.getElementById("form-error");
 
 // add event to all form input field
 for (let i = 0; i < formInputs.length; i++) {
@@ -145,6 +147,49 @@ for (let i = 0; i < formInputs.length; i++) {
 
   });
 }
+
+// Initialize EmailJS with working credentials
+emailjs.init("6LXxfCSjbNlXp-CBk");
+
+// form submission handling
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+  
+  // Hide any previous messages
+  successMessage.style.display = "none";
+  errorMessage.style.display = "none";
+  
+  // Disable submit button and show loading
+  formBtn.disabled = true;
+  formBtn.innerHTML = '<ion-icon name="hourglass-outline"></ion-icon><span>Sending...</span>';
+  
+  // Get form data
+  const formData = {
+    from_name: form.querySelector('input[name="fullname"]').value,
+    from_email: form.querySelector('input[name="email"]').value,
+    message: form.querySelector('textarea[name="message"]').value,
+    to_email: 'Sajid20shaikh@gmail.com'
+  };
+  
+  // Send email using EmailJS
+  emailjs.send('service_portfolio', 'template_contact', formData)
+    .then(function(response) {
+      // Success
+      successMessage.style.display = "block";
+      successMessage.classList.add("show");
+      form.reset();
+      formBtn.setAttribute("disabled", "");
+    }, function(error) {
+      // Error
+      errorMessage.style.display = "block";
+      errorMessage.classList.add("show");
+    })
+    .finally(() => {
+      // Re-enable submit button
+      formBtn.disabled = false;
+      formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Message</span>';
+    });
+});
 
 
 

@@ -1056,8 +1056,18 @@
         <section class="contact-form">
 
           <h3 class="h3 form-title">Contact Form</h3>
+          
+          <!-- Success message -->
+          <div id="form-success" class="form-message success-message" style="display: none;">
+            <p>✅ Thank you! Your message has been sent successfully. I'll get back to you soon!</p>
+          </div>
+          
+          <!-- Error message -->
+          <div id="form-error" class="form-message error-message" style="display: none;">
+            <p>❌ Sorry, there was an error sending your message. Please try again or contact me directly at Sajid20shaikh@gmail.com</p>
+          </div>
 
-          <form action="#" class="form" data-form>
+          <form class="form" data-form>
 
             <div class="input-wrapper">
               <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
@@ -1097,6 +1107,11 @@
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  
+  <!--
+    - EmailJS
+  -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 </body>
 
