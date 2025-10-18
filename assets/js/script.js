@@ -190,10 +190,9 @@ form.addEventListener("submit", function(e) {
         const thankYouData = {
           from_name: 'Sajid Shaikh',
           from_email: 'Sajid20shaikh@gmail.com',
-          to_email: formData.from_email,
           to_name: formData.from_name,
-          message: formData.message,
-          reply_message: `Hi ${formData.from_name},\n\nThank you for reaching out through my portfolio website!\n\nI've received your message:\n"${formData.message}"\n\nI'll get back to you as soon as possible, usually within 24 hours.\n\nBest regards,\nSajid Shaikh\nSoftware Engineer (Android & Flutter)\n\n---\nPortfolio: https://sajidshaikh20.github.io/sajid-shaikh-portfolio/\nEmail: Sajid20shaikh@gmail.com`
+          to_email: formData.from_email,
+          message: formData.message
         };
         
         // Send thank you email using the same template but with different data
