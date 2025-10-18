@@ -151,7 +151,7 @@ for (let i = 0; i < formInputs.length; i++) {
 
 // Initialize EmailJS with working credentials (with error handling)
 if (typeof emailjs !== 'undefined') {
-  emailjs.init("6LXxfCSjbNlXp-CBk");
+  emailjs.init("-nHgwASygmL9T2-Tm");
 } else {
   console.log("EmailJS not loaded yet, will retry...");
 }
