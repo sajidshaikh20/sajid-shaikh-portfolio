@@ -179,39 +179,31 @@ form.addEventListener("submit", function(e) {
   formBtn.innerHTML = '<ion-icon name="hourglass-outline"></ion-icon><span>Sending...</span>';
   
   // Get form data
-  const formData = new FormData(form);
+  const fullname = form.querySelector('input[name="fullname"]').value;
+  const email = form.querySelector('input[name="email"]').value;
+  const message = form.querySelector('textarea[name="message"]').value;
   
-  // Send email using Formspree
-  fetch(form.action, {
-    method: 'POST',
-    body: formData,
-    headers: {
-      'Accept': 'application/json'
-    }
-  })
-  .then(response => {
-    if (response.ok) {
-      // Success
-      successMessage.style.display = "block";
-      successMessage.classList.add("show");
-      form.reset();
-      formBtn.setAttribute("disabled", "");
-    } else {
-      throw new Error('Form submission failed');
-    }
-  })
-  .catch(error => {
-    console.error("Form submission failed:", error);
-    // Error
-    errorMessage.style.display = "block";
-    errorMessage.classList.add("show");
-  })
-  .finally(() => {
+  // Create mailto link
+  const subject = `New Contact Form Message from ${fullname}`;
+  const body = `Name: ${fullname}\nEmail: ${email}\nMessage: ${message}`;
+  const mailtoLink = `mailto:Sajid20shaikh@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  
+  // Simulate sending (open email client)
+  setTimeout(() => {
+    // Open email client
+    window.open(mailtoLink, '_blank');
+    
+    // Show success message
+    successMessage.style.display = "block";
+    successMessage.classList.add("show");
+    form.reset();
+    formBtn.setAttribute("disabled", "");
+    
     // Re-enable submit button and reset flag
     isSubmitting = false;
     formBtn.disabled = false;
     formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Message</span>';
-  });
+  }, 1000);
 });
 
 
