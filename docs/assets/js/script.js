@@ -181,15 +181,33 @@ form.addEventListener("submit", function(e) {
     console.log("Sending email with data:", formData);
     console.log("Using service ID: service_4x3ruat");
     
+    // Send notification email to you
     emailjs.send('service_4x3ruat', 'template_2u2efkq', formData)
       .then(function(response) {
-        console.log("Email sent successfully:", response);
+        console.log("Notification email sent successfully:", response);
+        
+        // Send thank you email to sender
+        const thankYouData = {
+          from_name: 'Sajid Shaikh',
+          from_email: 'Sajid20shaikh@gmail.com',
+          to_email: formData.from_email,
+          to_name: formData.from_name,
+          message: formData.message,
+          reply_message: `Hi ${formData.from_name},\n\nThank you for reaching out through my portfolio website!\n\nI've received your message:\n"${formData.message}"\n\nI'll get back to you as soon as possible, usually within 24 hours.\n\nBest regards,\nSajid Shaikh\nSoftware Engineer (Android & Flutter)\n\n---\nPortfolio: https://sajidshaikh20.github.io/sajid-shaikh-portfolio/\nEmail: Sajid20shaikh@gmail.com`
+        };
+        
+        // Send thank you email using the same template but with different data
+        return emailjs.send('service_4x3ruat', 'template_2u2efkq', thankYouData);
+      })
+      .then(function(response) {
+        console.log("Thank you email sent successfully:", response);
         // Success
         successMessage.style.display = "block";
         successMessage.classList.add("show");
         form.reset();
         formBtn.setAttribute("disabled", "");
-      }, function(error) {
+      })
+      .catch(function(error) {
         console.error("Email sending failed:", error);
         // Error
         errorMessage.style.display = "block";
