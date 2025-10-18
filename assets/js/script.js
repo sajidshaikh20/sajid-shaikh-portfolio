@@ -188,29 +188,18 @@ form.addEventListener("submit", function(e) {
   const body = `Name: ${fullname}\nEmail: ${email}\nMessage: ${message}`;
   const mailtoLink = `mailto:Sajid20shaikh@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   
-  // Simulate sending (open email client)
+  // Open email client immediately
+  window.location.href = mailtoLink;
+  
+  // Show success message
   setTimeout(() => {
-    try {
-      // Try to open email client
-      window.location.href = mailtoLink;
-      
-      // Show success message
-      successMessage.style.display = "block";
-      successMessage.classList.add("show");
-      form.reset();
-      formBtn.setAttribute("disabled", "");
-    } catch (error) {
-      console.error("Error opening email client:", error);
-      // Show error message
-      errorMessage.style.display = "block";
-      errorMessage.classList.add("show");
-    }
-    
-    // Re-enable submit button and reset flag
-    isSubmitting = false;
+    successMessage.style.display = "block";
+    successMessage.classList.add("show");
+    form.reset();
+    formBtn.setAttribute("disabled", "");
     formBtn.disabled = false;
     formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Message</span>';
-  }, 1000);
+  }, 500);
 });
 
 
