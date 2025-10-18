@@ -157,8 +157,17 @@ if (typeof emailjs !== 'undefined') {
 }
 
 // form submission handling
+let isSubmitting = false;
+
 form.addEventListener("submit", function(e) {
   e.preventDefault();
+  
+  // Prevent duplicate submissions
+  if (isSubmitting) {
+    return;
+  }
+  
+  isSubmitting = true;
   
   // Hide any previous messages
   successMessage.style.display = "none";
@@ -173,23 +182,38 @@ form.addEventListener("submit", function(e) {
   const email = form.querySelector('input[name="email"]').value;
   const message = form.querySelector('textarea[name="message"]').value;
   
-  // Create mailto link
-  const subject = `New Contact Form Message from ${fullname}`;
-  const body = `Name: ${fullname}\nEmail: ${email}\nMessage: ${message}`;
-  const mailtoLink = `mailto:Sajid20shaikh@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  // Prepare template parameters
+  const templateParams = {
+    from_name: fullname,
+    from_email: email,
+    message: message,
+    to_email: "Sajid20shaikh@gmail.com",
+    to_name: "Sajid Shaikh"
+  };
   
-  // Open email client
-  window.location.href = mailtoLink;
-  
-  // Show success message
-  setTimeout(() => {
-    successMessage.style.display = "block";
-    successMessage.classList.add("show");
-    form.reset();
-    formBtn.setAttribute("disabled", "");
-    formBtn.disabled = false;
-    formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Message</span>';
-  }, 500);
+  // Send email using EmailJS
+  emailjs.send('service_4x3ruat', 'template_2u2efkq', templateParams)
+    .then(function(response) {
+      console.log('SUCCESS!', response.status, response.text);
+      
+      // Show success message
+      successMessage.style.display = "block";
+      successMessage.classList.add("show");
+      form.reset();
+      
+    }, function(error) {
+      console.log('FAILED...', error);
+      
+      // Show error message
+      errorMessage.style.display = "block";
+      errorMessage.classList.add("show");
+    })
+    .finally(function() {
+      // Re-enable submit button
+      isSubmitting = false;
+      formBtn.disabled = false;
+      formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Message</span>';
+    });
 });
 
 
