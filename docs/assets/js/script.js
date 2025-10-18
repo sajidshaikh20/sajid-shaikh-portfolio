@@ -157,8 +157,18 @@ if (typeof emailjs !== 'undefined') {
 }
 
 // form submission handling
+let isSubmitting = false; // Flag to prevent duplicate submissions
+
 form.addEventListener("submit", function(e) {
   e.preventDefault();
+  
+  // Prevent duplicate submissions
+  if (isSubmitting) {
+    console.log("Form already submitting, ignoring duplicate submission");
+    return;
+  }
+  
+  isSubmitting = true;
   
   // Hide any previous messages
   successMessage.style.display = "none";
@@ -198,7 +208,8 @@ form.addEventListener("submit", function(e) {
         errorMessage.classList.add("show");
       })
       .finally(() => {
-        // Re-enable submit button
+        // Re-enable submit button and reset flag
+        isSubmitting = false;
         formBtn.disabled = false;
         formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Message</span>';
       });
@@ -209,6 +220,7 @@ form.addEventListener("submit", function(e) {
       successMessage.classList.add("show");
       form.reset();
       formBtn.setAttribute("disabled", "");
+      isSubmitting = false;
       formBtn.disabled = false;
       formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Message</span>';
       console.log("Contact Form Submission (EmailJS not available):", formData);
