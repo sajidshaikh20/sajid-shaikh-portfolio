@@ -181,7 +181,7 @@ form.addEventListener("submit", function(e) {
     console.log("Sending email with data:", formData);
     console.log("Using service ID: service_4x3ruat");
     
-    emailjs.send('service_4x3ruat', 'template_contact', formData)
+    emailjs.send('service_4x3ruat', 'template_2u2efkq', formData)
       .then(function(response) {
         console.log("Email sent successfully:", response);
         // Success
