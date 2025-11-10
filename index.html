@@ -749,21 +749,31 @@
             </li>
 
             <li class="project-item  active" data-filter-item data-category="flutter apps">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-2.png" alt="AlokozayShop" loading="lazy">
-                </figure>
-
+              <div class="project-container project-card">
+                <center>
+                  <video
+                    class="project-pic"
+                    controls
+                    playsinline
+                    autoplay
+                    muted
+                    loop
+                  >
+                    <source src="./docs/assets/vedio/alokozay.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </center>
+                <br />
                 <h3 class="project-title">AlokozayShop</h3>
-
+                <p class="project-details">
+                  Online grocery shopping app with 50K+ downloads. Shop food products, health & hygiene, personal care, and household items with same-day delivery across UAE.
+                </p>
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 10px;">
+                  <a href="https://play.google.com/store/apps/details?id=com.alokozayshop.app" class="project-link" target="_blank">Play Store</a>
+                  <a href="https://apps.apple.com/us/app/alokozayshop-online-grocery/id1551339483" class="project-link" target="_blank">App Store</a>
+                </div>
                 <p class="project-category">Flutter Apps</p>
-
-              </a>
+              </div>
             </li>
 
             <li class="project-item  active" data-filter-item data-category="e-commerce">
