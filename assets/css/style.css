@@ -1183,10 +1183,16 @@ main {
   font-weight: var(--fw-400);
   text-decoration: none;
   transition: var(--transition-1);
+  border: 1px solid var(--orange-yellow-crayola);
+  border-radius: 8px;
+  padding: 8px 16px;
+  display: inline-block;
 }
 
 .project-link:hover {
   color: var(--white-2);
+  background-color: var(--orange-yellow-crayola);
+  border-color: var(--orange-yellow-crayola);
 }
 
 
