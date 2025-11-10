@@ -1167,7 +1167,7 @@ main {
 }
 
 .project-details {
-  margin-bottom: 1rem;
+  margin-bottom: 5px;
   flex-grow: 1;
   color: var(--light-gray);
   font-size: var(--fs-6);
@@ -1177,7 +1177,8 @@ main {
 }
 
 .project-link {
-  margin-top: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
   color: var(--orange-yellow-crayola);
   font-size: var(--fs-6);
   font-weight: var(--fw-400);
