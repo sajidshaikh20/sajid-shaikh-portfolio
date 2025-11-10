@@ -724,21 +724,42 @@
           <ul class="project-list">
 
             <li class="project-item  active" data-filter-item data-category="android native">
-              <a href="#">
+              <div class="project-video-container">
 
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
+                <figure class="project-img project-video-wrapper">
+                  <video class="project-video" id="nike-video" preload="metadata" poster="./assets/images/project-1.jpg">
+                    <source src="./assets/vedio/nike.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                  
+                  <div class="video-controls">
+                    <button class="video-play-btn" id="nike-play-btn" aria-label="Play video">
+                      <ion-icon name="play"></ion-icon>
+                    </button>
+                    <div class="video-progress-container">
+                      <div class="video-progress-bar">
+                        <div class="video-progress-fill" id="nike-progress"></div>
+                      </div>
+                      <button class="video-mute-btn" id="nike-mute-btn" aria-label="Mute/Unmute">
+                        <ion-icon name="volume-high" id="nike-mute-icon"></ion-icon>
+                      </button>
+                    </div>
                   </div>
-
-                  <img src="./assets/images/project-1.jpg" alt="Nike Android App" loading="lazy">
                 </figure>
 
-                <h3 class="project-title">Nike - Shoes & Apparel Shopping</h3>
+                <div class="project-info">
+                  <h3 class="project-title">Nike - Shoes & Apparel Shopping</h3>
+                  <p class="project-description">E-commerce app with 100K+ downloads. Shop the latest Nike shoes and apparel with seamless checkout experience.</p>
+                  <div class="project-links">
+                    <a href="#" class="project-link" target="_blank" aria-label="View on Play Store">
+                      <ion-icon name="storefront-outline"></ion-icon>
+                      <span>View on Play Store</span>
+                    </a>
+                  </div>
+                  <p class="project-category">Android Native</p>
+                </div>
 
-                <p class="project-category">Android Native</p>
-
-              </a>
+              </div>
             </li>
 
             <li class="project-item  active" data-filter-item data-category="flutter apps">
