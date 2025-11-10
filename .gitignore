@@ -22,6 +22,5 @@ Thumbs.db
 # Logs
 *.log
 
-# Large video files (exceed GitHub's 100MB limit)
-docs/assets/vedio/*.mp4
-*.mp4
+# Large video files are now tracked with Git LFS
+# *.mp4 files are tracked via .gitattributes
